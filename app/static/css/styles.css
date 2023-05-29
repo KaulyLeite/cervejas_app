@@ -1,0 +1,78 @@
+body {
+    background-image: linear-gradient(to right, #FFD6AD 0%, white 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    background-color: #F6F6F6;
+    max-width: 1000px;
+    margin: 20px auto auto;
+    padding: 40px;
+    border: 0.03em solid lightgray;
+    border-radius: 5px;
+}
+
+.images {
+    width: 200px;
+    height: 200px;
+    border: 0.03em solid lightgray;
+    border-radius: 100%;
+}
+
+.logo {
+    width: 238px;
+}
+
+.nav-item {
+    padding: 0 54px;
+}
+
+.navbar-expand-lg {
+    background-color: #FFEBB5;
+    max-width: 1000px;
+    margin: auto;
+    border-style: solid;
+    border-width: 0.03em;
+    border-radius: 0 0 5px 5px;
+    border-color: lightgray;
+}
+
+.navbar-toggler {
+    margin-bottom: 20px;
+}
+
+.row {
+    background-color: #F6F6F6;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 40px 40px 0 40px;
+    border: 0.03em solid lightgray;
+    border-radius: 5px;
+}
+
+p:first-child {
+    font-size: 18px;
+}
+
+p:last-child {
+    font-size: 12px;
+}
+
+p:nth-child(2) {
+    font-size: 16px;
+    color: #808080;
+}
+
+button {
+    margin-top: 20px;
+}
+
+h6 {
+    margin-top: 15px;
+}
+
+h6:nth-child(odd) {
+    font-size: 14px;
+    color: #808080;
+    padding-bottom: 30px;
+}
