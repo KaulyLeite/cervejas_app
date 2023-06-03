@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load static %}
+<title>{% block title %}Sobre - Carlos Cervejas Especiais{% endblock %}</title>
+{% block styles %}
+    <link href="{% static 'css/styles_sobre.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block home %}
+    <a class="nav-link inactive" href="{% url 'home' %}">Principal</a>
+{% endblock %}
+{% block sobre %}
+    <a class="nav-link active" href="{% url 'sobre' %}" aria-current="page">Sobre</a>
+{% endblock %}
+{% block content %}
+    <div class="container" style="background-image: url('{% static 'images/banner.png' %}')"></div>
+    <div class="container row">
+        <div class="col-md-4">
+            <h6>&#8226 A Carlos Cervejas Especiais atende toda a região de Garopaba e Imbituba (SC) oferecendo as
+                melhores opções de cervejas artesanais do mercado com ótimo preço e qualidade.</h6>
+        </div>
+        <div class="col-md-4">
+            <h6>&#8226 Nossa Missão: Proporcionar aos clientes bem-estar, oferecendo os melhores produtos voltados ao
+                segmento cervejeiro com o melhor serviço de atendimento e entrega.</h6>
+        </div>
+        <div class="col-md-4">
+            <h6>&#8226 Nossa Visão: Ser o maior distribuidor do país e servir de referência para as demais regiões do
+                Brasil.</h6>
+        </div>
+        <p>Para dúvidas e pedidos, favor contatar através dos canais abaixo:</p>
+        <h6>E-mail:</h6>
+        <p>calinholeite@yahoo.com.br</p>
+        <h6>Telefone:</h6>
+        <p>(48) 99129-8261</p>
+        <hr>
+        <p>&copy; Carlos Cervejas Especiais 2022</p>
+    </div>
+{% endblock %}
