@@ -2,6 +2,10 @@
 
 Web system for promotion, order placement, and inventory management for a craft beer distributor.
 
+### Project Status:
+
+Under development.
+
 ## Setup
 
 First, clone the GitHub repository:
