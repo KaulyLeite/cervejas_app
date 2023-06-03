@@ -13,8 +13,6 @@ body {
 }
 
 .images {
-    width: 200px;
-    height: 200px;
     border: 0.03em solid lightgray;
     border-radius: 100%;
 }
@@ -48,6 +46,11 @@ body {
     padding: 40px 40px 0 40px;
     border: 0.03em solid lightgray;
     border-radius: 5px;
+}
+
+.text-button {
+    text-decoration: none;
+    color: white;
 }
 
 p:first-child {
