@@ -1,20 +1,29 @@
-body {
-    background-image: linear-gradient(to right, #FFD6AD 0%, white 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+:root {
+    --border-thickness: 0.03em;
+    --dark-gray: #808080;
+    --pale-orange: #FFEBB5;
+    --very-light-gray: #F6F6F6;
+    --very-light-orange: #FFD6AD;
 }
 
 .container {
-    background-color: #F6F6F6;
-    max-width: 1000px;
-    margin: 20px auto auto;
-    padding: 40px;
-    border: 0.03em solid lightgray;
+    background-color: var(--very-light-gray);
+    border: var(--border-thickness) solid lightgray;
     border-radius: 5px;
+    margin: 20px auto;
+    max-width: 1000px;
+    padding: 40px;
 }
 
 .images {
-    border: 0.03em solid lightgray;
+    border: var(--border-thickness) solid lightgray;
     border-radius: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.inactive {
+    opacity: 90%;
 }
 
 .logo {
@@ -26,31 +35,45 @@ body {
 }
 
 .navbar-expand-lg {
-    background-color: #FFEBB5;
-    max-width: 1000px;
-    margin: auto;
-    border-style: solid;
-    border-width: 0.03em;
-    border-radius: 0 0 5px 5px;
+    background-color: var(--pale-orange);
     border-color: lightgray;
+    border-radius: 0 0 5px 5px;
+    border-style: solid;
+    border-width: var(--border-thickness);
+    margin: auto;
+    max-width: 1000px;
 }
 
 .navbar-toggler {
     margin-bottom: 20px;
 }
 
-.row {
-    background-color: #F6F6F6;
-    max-width: 1000px;
-    margin: 20px auto;
+.row.container {
     padding: 40px 40px 0 40px;
-    border: 0.03em solid lightgray;
-    border-radius: 5px;
 }
 
 .text-button {
-    text-decoration: none;
     color: white;
+    text-decoration: none;
+}
+
+body {
+    background-image: linear-gradient(to right, var(--very-light-orange), white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button {
+    margin-top: 15px;
+}
+
+h6 {
+    margin-top: 15px;
+}
+
+h6:nth-child(odd) {
+    color: var(--dark-gray);
+    font-size: 14px;
+    margin-bottom: 35px;
 }
 
 p:first-child {
@@ -62,20 +85,6 @@ p:last-child {
 }
 
 p:nth-child(2) {
+    color: var(--dark-gray);
     font-size: 16px;
-    color: #808080;
-}
-
-button {
-    margin-top: 20px;
-}
-
-h6 {
-    margin-top: 15px;
-}
-
-h6:nth-child(odd) {
-    font-size: 14px;
-    color: #808080;
-    padding-bottom: 30px;
 }
