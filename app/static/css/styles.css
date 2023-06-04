@@ -57,6 +57,17 @@
     text-decoration: none;
 }
 
+.whatsapp {
+    bottom: 20px;
+    position: fixed;
+    right: 20px;
+}
+
+.whatsapp img {
+    height: 90px;
+    width: 90px;
+}
+
 body {
     background-image: linear-gradient(to right, var(--very-light-orange), white);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
