@@ -51,6 +51,10 @@
     padding: 32px 40px 24px;
 }
 
+.container.row {
+    padding: 20px 40px 0 40px;
+}
+
 .inactive {
     opacity: 90%;
 }
@@ -75,10 +79,6 @@
 
 .navbar-toggler {
     margin: auto 0 auto auto;
-}
-
-.row.container {
-    padding: 40px 40px 0 40px;
 }
 
 .whatsapp {
@@ -107,14 +107,11 @@ p {
 
 p a {
     color: var(--light-orange);
+    font-weight: bold;
     text-decoration: none;
 }
 
-p:nth-of-type(2) {
+p:nth-child(3) {
     color: var(--dark-gray);
-    font-size: 12px;
-}
-
-p:last-child {
     font-size: 12px;
 }

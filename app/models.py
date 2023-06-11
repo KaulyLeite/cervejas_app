@@ -11,8 +11,8 @@ class Marca(models.Model):
 
 class Produto(models.Model):
     objects = models.Manager()
-    nome = models.CharField(max_length=50)
-    quantidade = models.PositiveIntegerField()
+    nome = models.CharField(max_length=45)
+    conteudo = models.PositiveIntegerField()
     descricao = models.TextField()
     ibu = models.PositiveIntegerField()
     abv = models.FloatField()

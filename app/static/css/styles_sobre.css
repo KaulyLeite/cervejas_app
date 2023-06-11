@@ -18,6 +18,10 @@
     padding: 40px 40px 260px;
 }
 
+.container.row {
+    padding: 40px 40px 0 40px;
+}
+
 @media (max-width: 600px) {
     .container {
         padding-bottom: 160px;
@@ -50,10 +54,6 @@
     margin: auto 0 auto auto;
 }
 
-.row.container {
-    padding: 40px 40px 0 40px;
-}
-
 .whatsapp {
     bottom: 20px;
     position: fixed;
@@ -80,14 +80,16 @@ h6:first-child {
 }
 
 p {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 p a {
     color: var(--light-orange);
+    font-weight: bold;
     text-decoration: none;
 }
 
 p:last-child {
+    color: var(--dark-gray);
     font-size: 12px;
 }

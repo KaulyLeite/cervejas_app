@@ -15,6 +15,10 @@
     padding: 40px;
 }
 
+.container.row {
+    padding: 40px 40px 0 40px;
+}
+
 .images {
     border: var(--border-thickness) solid lightgray;
     border-radius: 100%;
@@ -48,10 +52,6 @@
     margin: auto 0 auto auto;
 }
 
-.row.container {
-    padding: 40px 40px 0 40px;
-}
-
 .text-button {
     color: white;
     text-decoration: none;
@@ -78,13 +78,13 @@ button {
 }
 
 h6 {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 h6:nth-child(odd) {
     color: var(--dark-gray);
     font-size: 14px;
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
 p:first-child {
@@ -92,6 +92,7 @@ p:first-child {
 }
 
 p:last-child {
+    color: var(--dark-gray);
     font-size: 12px;
 }
 
