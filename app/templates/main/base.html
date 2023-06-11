@@ -31,7 +31,7 @@
                 </li>
                 <li class="nav-item">
                     {% block produtos %}
-                        <a class="nav-link inactive" href="">Produtos</a>
+                        <a class="nav-link inactive" href="{% url 'produtos' %}">Produtos</a>
                     {% endblock %}
                 </li>
                 <li class="nav-item">
@@ -40,8 +40,8 @@
                     {% endblock %}
                 </li>
                 <li class="nav-item">
-                    {% block pedido %}
-                        <a class="nav-link inactive" href="">Pedido</a>
+                    {% block pedidos %}
+                        <a class="nav-link inactive" href="">Pedidos</a>
                     {% endblock %}
                 </li>
             </ul>
@@ -59,7 +59,7 @@
             em toda a região de Garopaba e Imbituba - Santa Catarina.</p>
         <p>Oferecemos as melhores opções de cervejas artesanais do mercado com ótimo preço e qualidade.</p>
         <button class="btn btn-secondary" type="button">
-            <a class="text-button" href="">Conheça a nossa linha de cervejas especiais!</a>
+            <a class="text-button" href="{% url 'produtos' %}">Conheça a nossa linha de cervejas especiais!</a>
         </button>
     </div>
 

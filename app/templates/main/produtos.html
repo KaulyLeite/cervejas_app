@@ -1,0 +1,46 @@
+{% extends "main/base.html" %}
+{% load static %}
+<title>{% block title %}Produtos - Carlos Cervejas Especiais{% endblock %}</title>
+{% block styles %}
+    <link href="{% static 'css/styles_produtos.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block home %}
+    <a class="nav-link inactive" href="{% url 'home' %}">Principal</a>
+{% endblock %}
+{% block produtos %}
+    <a class="nav-link active" href="{% url 'produtos' %}" aria-current="page">Produtos</a>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for produto in produtos %}
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="card-img-container">
+                                    <img src="{{ produto.imagem.url }}" class="img-fluid rounded-start"
+                                         alt="{{ produto.nome }}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ produto.nome }} - {{ produto.quantidade }}ml</h6>
+                                    <p class="card-text">&#8226; {{ produto.descricao }}</p>
+                                    <p class="card-text">IBU {{ produto.ibu }} - ABV {{ produto.abv }}%</p>
+                                    <h6 class="card-title">R$ {{ produto.valor }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container row">
+        <hr>
+        <p>&copy; Carlos Cervejas Especiais 2023</p>
+    </div>
+{% endblock %}
