@@ -7,4 +7,5 @@ urlpatterns = [
                   path('', views.index, name="home"),
                   path('produtos', views.produtos, name="produtos"),
                   path('sobre', views.sobre, name="sobre"),
+                  path('pedidos', views.pedidos, name="pedidos"),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

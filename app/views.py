@@ -5,6 +5,7 @@ from app.models import Marca, Produto
 TEMPLATE_BASE = "main/base.html"
 TEMPLATE_PRODUTOS = "main/produtos.html"
 TEMPLATE_SOBRE = "main/sobre.html"
+TEMPLATE_PEDIDOS = "main/pedidos.html"
 
 
 # Create your views here.
@@ -20,3 +21,7 @@ def produtos(request):
 
 def sobre(request):
     return render(request, TEMPLATE_SOBRE)
+
+
+def pedidos(request):
+    return render(request, TEMPLATE_PEDIDOS)
