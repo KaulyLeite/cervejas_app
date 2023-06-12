@@ -79,6 +79,16 @@ h6:first-child {
     margin-bottom: 30px;
 }
 
+h6:nth-child(5) {
+    color: inherit;
+    font-weight: normal;
+}
+
+h6:nth-child(7) {
+    color: inherit;
+    font-weight: normal;
+}
+
 p {
     font-size: 14px;
 }
