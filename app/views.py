@@ -24,4 +24,5 @@ def sobre(request):
 
 
 def pedidos(request):
-    return render(request, TEMPLATE_PEDIDOS)
+    produtos = Produto.objects.all()
+    return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos})

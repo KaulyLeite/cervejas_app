@@ -7,6 +7,18 @@
     --very-light-orange: #FFD6AD;
 }
 
+.align-middle:nth-child(2) {
+    width: 50%;
+}
+
+.align-middle:nth-child(3) {
+    width: 30%;
+}
+
+.align-middle:nth-child(4) {
+    width: 20%;
+}
+
 .container {
     background-color: var(--very-light-gray);
     background-position: center;
@@ -20,6 +32,14 @@
 
 .container.row {
     padding: 40px 40px 0 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.images {
+    width: 80px;
 }
 
 .inactive {
@@ -64,7 +84,21 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+button {
+    margin-bottom: 30px;
+}
+
+h6 {
+    color: var(--dark-gray);
+    font-size: 20px;
+    text-align: center;
+}
+
 p:last-child {
     color: var(--dark-gray);
     font-size: 12px;
+}
+
+thead {
+    background-color: var(--dark-gray);
 }
