@@ -71,6 +71,14 @@
     margin: auto 0 auto auto;
 }
 
+.rounded-top-left {
+    border-top-left-radius: 5px;
+}
+
+.rounded-top-right {
+    border-top-right-radius: 5px;
+}
+
 .text-muted span {
     color: var(--dark-gray);
     font-weight: bold;
