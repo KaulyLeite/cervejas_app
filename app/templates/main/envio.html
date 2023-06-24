@@ -1,0 +1,91 @@
+{% extends "main/base.html" %}
+{% load static %}
+<title>{% block title %}Envio - Carlos Cervejas Especiais{% endblock %}</title>
+{% block styles %}
+    <link href="{% static 'css/styles_envio.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block home %}
+    <a class="nav-link inactive" href="{% url 'home' %}">Principal</a>
+{% endblock %}
+{% block pedidos %}
+    <a class="nav-link active" href="{% url 'pedidos' %}" aria-current="page">Pedidos</a>
+{% endblock %}
+{% block content %}
+    <div class="container row">
+        <div class="d-flex justify-content-center">
+            <h6>Confirme os dados do pedido:</h6>
+        </div>
+        <div class="row d-flex align-items-baseline">
+            <p>Pedido: <strong>{{ pedido }}</strong></p>
+            <hr class="divider">
+        </div>
+        <div class="col-xl-7">
+            <ul class="list-unstyled">
+                <li class="text-muted">
+                    <span>Nome: </span>{{ nome }}
+                </li>
+                <li class="text-muted">
+                    <span>E-mail: </span>{{ email }}
+                </li>
+                <li class="text-muted">
+                    <span>Telefone: </span>{{ telefone }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-xl-5">
+            <ul class="list-unstyled">
+                <li class="text-muted">
+                    <span>Cidade, Estado: </span>{{ cidade }}, {{ estado }}
+                </li>
+                <li class="text-muted">
+                    <span>Endereço: </span>{{ endereco }}
+                </li>
+                <li class="text-muted">
+                    <span>Data do Pedido: </span>{{ data }}
+                </li>
+            </ul>
+        </div>
+        <div class="row my-3 mx-1 justify-content-center">
+            <table class="table table-striped table-borderless" aria-describedby="table">
+                <thead class="text-white">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Valor Unit.</th>
+                    <th scope="col">Qtde.</th>
+                    <th scope="col">Valor Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for produto in produtos %}
+                    <tr>
+                        <th class="align-middle" scope="row">
+                            <div class="card-img-container images">
+                                <img class="img-fluid rounded-start" src="{{ produto.imagem.url }}"
+                                     alt="{{ produto.nome }}">
+                            </div>
+                        </th>
+                        <td class="align-middle">{{ produto.nome }}</td>
+                        <td class="align-middle">R$ {{ produto.valor }}</td>
+                        <td class="align-middle">{{ produto.qtde }}</td>
+                        <td class="align-middle">R$ {{ produto.total }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-xl-11">
+                    <p class="text-black float-end">
+                        <span class="text-black me-3">Valor Total do Pedido: </span>
+                        <span>R$ {{ total_pedido }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-secondary btn-lg">Enviar</button>
+        </div>
+        <hr>
+        <p>&copy; Carlos Cervejas Especiais 2023</p>
+    </div>
+{% endblock %}

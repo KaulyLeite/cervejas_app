@@ -12,7 +12,7 @@
 {% endblock %}
 {% block content %}
     <div class="container row">
-        <form method="post" class="needs-validation" novalidate>
+        <form action="{% url 'envio' %}" method="post" class="needs-validation" novalidate>
             {% csrf_token %}
             <div class="d-flex justify-content-center">
                 <h6>Preencha os dados:</h6>
@@ -68,17 +68,17 @@
                             </th>
                             <td class="align-middle">
                                 <label>
-                                    <input name="p{{ forloop.counter }}_nome" value="{{ produto.nome }}" hidden>
+                                    <input value="{{ produto.nome }}" hidden>
                                 </label>{{ produto.nome }}
                             </td>
                             <td class="align-middle">
                                 <label>
-                                    <input name="p{{ forloop.counter }}_valor" value="{{ produto.valor }}" hidden>
+                                    <input value="{{ produto.valor }}" hidden>
                                 </label>R$ {{ produto.valor }}
                             </td>
                             <td class="align-middle">
-                                <label for="p{{ forloop.counter }}_qtde"></label>
-                                <input name="p{{ forloop.counter }}_qtde" id="p{{ forloop.counter }}_qtde"
+                                <label for="{{ forloop.counter }}_qtde"></label>
+                                <input name="{{ forloop.counter }}_qtde" id="{{ forloop.counter }}_qtde"
                                        class="col-md-5 text-center input-qtde" type="number" min="0" max="99" value="0"
                                        oninput="this.value = Math.abs(this.value)" required>
                             </td>
@@ -96,16 +96,15 @@
     </div>
     <script>
         (function () {
-            "use strict"
-
+            'use strict'
             let forms = document.querySelectorAll('.needs-validation')
             Array.prototype.slice.call(forms)
                 .forEach(function (form) {
-                    form.addEventListener("submit", function (event) {
+                    form.addEventListener('submit', function (event) {
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()
-                            form.scrollIntoView({ behavior: "smooth", block: "start" })
+                            form.scrollIntoView({behavior: 'smooth', block: 'start'})
                         }
 
                         let qtdeInputs = document.getElementsByClassName("input-qtde")
@@ -115,13 +114,13 @@
                         }
 
                         if (soma === 0) {
-                            alert("A quantidade de pelo menos um produto precisa ser maior que zero!")
+                            alert('A quantidade de pelo menos um produto precisa ser maior que zero!')
                             event.preventDefault()
                             event.stopPropagation()
-                            form.scrollIntoView({ behavior: "smooth", block: "start" })
+                            form.scrollIntoView({behavior: 'smooth', block: 'start'})
                         }
 
-                        form.classList.add("was-validated")
+                        form.classList.add('was-validated')
                     }, false)
                 })
         })()
