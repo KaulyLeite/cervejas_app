@@ -101,10 +101,11 @@
             let forms = document.querySelectorAll('.needs-validation')
             Array.prototype.slice.call(forms)
                 .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
+                    form.addEventListener("submit", function (event) {
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()
+                            form.scrollIntoView({ behavior: "smooth", block: "start" })
                         }
 
                         let qtdeInputs = document.getElementsByClassName("input-qtde")
@@ -117,9 +118,10 @@
                             alert("A quantidade de pelo menos um produto precisa ser maior que zero!")
                             event.preventDefault()
                             event.stopPropagation()
+                            form.scrollIntoView({ behavior: "smooth", block: "start" })
                         }
 
-                        form.classList.add('was-validated')
+                        form.classList.add("was-validated")
                     }, false)
                 })
         })()
