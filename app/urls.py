@@ -8,5 +8,5 @@ urlpatterns = [
                   path('produtos', views.produtos, name='produtos'),
                   path('sobre', views.sobre, name='sobre'),
                   path('pedidos', views.pedidos, name='pedidos'),
-                  path('envio', views.envio, name='envio'),
+                  path('confirmacao', views.confirmacao, name='confirmacao'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,7 +12,7 @@
 {% endblock %}
 {% block content %}
     <div class="container row">
-        <form action="{% url 'envio' %}" method="post" class="needs-validation" novalidate>
+        <form action="{% url 'confirmacao' %}" method="post" class="needs-validation" novalidate>
             {% csrf_token %}
             <div class="d-flex justify-content-center">
                 <h6>Preencha os dados:</h6>

@@ -7,7 +7,7 @@ TEMPLATE_BASE = 'main/base.html'
 TEMPLATE_PRODUTOS = 'main/produtos.html'
 TEMPLATE_SOBRE = 'main/sobre.html'
 TEMPLATE_PEDIDOS = 'main/pedidos.html'
-TEMPLATE_ENVIO = 'main/envio.html'
+TEMPLATE_CONFIRMACAO = 'main/confirmacao.html'
 
 
 # Create your views here.
@@ -30,8 +30,8 @@ def pedidos(request):
     return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos_pedidos})
 
 
-def envio(request):
-    produtos_enviados = Produto.objects.all()
+def confirmacao(request):
+    produtos_confirmados = Produto.objects.all()
     if request.method == 'POST':
         pedido = uuid.uuid4().hex[:8].upper()
 
@@ -45,7 +45,7 @@ def envio(request):
         data = datetime.now().strftime('%d/%m/%Y')
 
         produtos_selecionados = []
-        for produto in produtos_enviados:
+        for produto in produtos_confirmados:
             qtde_key = f'{produto.id}_qtde'
             qtde = int(request.POST.get(qtde_key, 0))
             if qtde > 0:
@@ -55,8 +55,15 @@ def envio(request):
 
         total_pedido = sum(produto.total for produto in produtos_selecionados)
 
-        return render(request, TEMPLATE_ENVIO,
-                      {'pedido': pedido, 'nome': nome, 'email': email, 'telefone': telefone,
-                       'endereco': endereco, 'cidade': cidade, 'estado': estado, 'data': data,
-                       'produtos': produtos_selecionados, 'total_pedido': total_pedido})
+        return render(request, TEMPLATE_CONFIRMACAO,
+                      {'pedido': pedido,
+                       'nome': nome,
+                       'email': email,
+                       'telefone': telefone,
+                       'endereco': endereco,
+                       'cidade': cidade,
+                       'estado': estado,
+                       'data': data,
+                       'produtos': produtos_selecionados,
+                       'total_pedido': total_pedido})
     return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos})
