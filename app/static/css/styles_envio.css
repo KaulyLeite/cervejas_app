@@ -79,11 +79,6 @@
     border-top-right-radius: 5px;
 }
 
-.text-muted span {
-    color: var(--dark-gray);
-    font-weight: bold;
-}
-
 .whatsapp {
     bottom: 20px;
     position: fixed;
