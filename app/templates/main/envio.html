@@ -1,8 +1,8 @@
 {% extends "main/base.html" %}
 {% load static %}
-<title>{% block title %}Confirmação - Carlos Cervejas Especiais{% endblock %}</title>
+<title>{% block title %}Envio - Carlos Cervejas Especiais{% endblock %}</title>
 {% block styles %}
-    <link href="{% static 'css/styles_confirmacao.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/styles_envio.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
 {% block home %}
     <a class="nav-link inactive" href="{% url 'home' %}">Principal</a>
@@ -13,7 +13,7 @@
 {% block content %}
     <div class="container row">
         <div class="d-flex justify-content-center">
-            <h6>Confirme os dados do pedido:</h6>
+            <h6>Pedido enviado com sucesso!</h6>
         </div>
         <div class="row d-flex align-items-baseline">
             <p>Pedido: <strong>{{ pedido }}</strong></p>
@@ -83,19 +83,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <form method="post" action="{% url 'envio' %}">
-                {% csrf_token %}
-                <input type="hidden" name="pedido" value="{{ pedido }}">
-                <input type="hidden" name="nome" value="{{ nome }}">
-                <input type="hidden" name="email" value="{{ email }}">
-                <input type="hidden" name="telefone" value="{{ telefone }}">
-                <input type="hidden" name="endereco" value="{{ endereco }}">
-                <input type="hidden" name="cidade" value="{{ cidade }}">
-                <input type="hidden" name="estado" value="{{ estado }}">
-                <input type="hidden" name="data" value="{{ data }}">
-                <input type="hidden" name="total_pedido" value="{{ total_pedido }}">
-                <button type="submit" class="btn btn-secondary btn-lg">Enviar</button>
-            </form>
+            <button type="submit" class="btn btn-secondary btn-lg">Gerar PDF</button>
         </div>
         <hr>
         <p>&copy; Carlos Cervejas Especiais 2023</p>
