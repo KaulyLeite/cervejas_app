@@ -1,6 +1,11 @@
 from app.models import Marca, Produto
 from datetime import datetime
+from django.conf import settings
 from django.shortcuts import render
+import configparser
+import email as emailpkg
+import locale
+import smtplib
 import uuid
 
 TEMPLATE_BASE = 'main/base.html'
@@ -86,6 +91,9 @@ def envio(request):
         produtos_selecionados = Produto.objects.filter(pedido=pedido)
         total_pedido = request.POST['total_pedido']
 
+        envio_email(pedido, nome, email, telefone, endereco,
+                    cidade, estado, data, produtos_selecionados, total_pedido)
+
         return render(request, TEMPLATE_ENVIO, {
             'pedido': pedido,
             'nome': nome,
@@ -98,3 +106,57 @@ def envio(request):
             'produtos': produtos_selecionados,
             'total_pedido': total_pedido
         })
+
+
+def envio_email(pedido, nome, email, telefone, endereco,
+                cidade, estado, data, produtos_selecionados, total_pedido):
+    language_code = settings.LANGUAGE_CODE
+    locale.setlocale(locale.LC_ALL, language_code)
+
+    descricao = 'Obrigado por realizar o seu pedido conosco!<br>'
+    descricao += 'Em breve entraremos em contato neste e-mail para mais ' \
+                 'detalhes sobre o pagamento e entrega do pedido.<br>'
+    descricao += '<br>'
+    descricao += 'Dados do pedido:<br>'
+    descricao += '<br>'
+    descricao += f'Pedido: {pedido}<br>'
+    descricao += f'Nome: {nome}<br>'
+    descricao += f'E-mail: {email}<br>'
+    descricao += f'Telefone: {telefone}<br>'
+    descricao += f'Endereço: {endereco}<br>'
+    descricao += f'Cidade, Estado: {cidade}, {estado}<br>'
+    descricao += f'Data: {data}<br>'
+    descricao += '<br>'
+
+    for produto in produtos_selecionados:
+        valor_formatado = locale.currency(produto.valor, grouping=True, symbol=True)
+        total_formatado = locale.currency(produto.total, grouping=True, symbol=True)
+
+        descricao += f'Produto: {produto.nome}<br>'
+        descricao += f'Valor unitário: R$ {valor_formatado}<br>'
+        descricao += f'Quantidade: {produto.qtde}<br>'
+        descricao += f'Valor total: R$ {total_formatado}<br>'
+        descricao += '<br>'
+
+    descricao += f'Valor total do pedido: R$ {total_pedido}<br>'
+
+    mensagem = emailpkg.message.Message()
+    mensagem['Subject'] = f'Pedido: {pedido} - Carlos Cervejas Especiais'
+
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    remetente = config['EMAIL']['remetente']
+    destinatarios = [remetente, email]
+    senha = config['EMAIL']['senha']
+
+    mensagem['From'] = remetente
+    mensagem['To'] = ', '.join(destinatarios)
+
+    mensagem.add_header('Content-Type', 'text/html')
+    mensagem.set_payload(descricao)
+
+    smtp = smtplib.SMTP('smtp.gmail.com: 587')
+    smtp.starttls()
+    smtp.login(remetente, senha)
+    smtp.sendmail(remetente, destinatarios, mensagem.as_string().encode('utf-8'))
+    smtp.quit()
