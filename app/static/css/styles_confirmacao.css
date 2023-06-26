@@ -1,10 +1,25 @@
 :root {
     --border-thickness: 0.03em;
     --dark-gray: #808080;
-    --light-orange: #FFA74F;
     --pale-orange: #FFEBB5;
     --very-light-gray: #F6F6F6;
     --very-light-orange: #FFD6AD;
+}
+
+.align-middle:nth-child(2) {
+    width: 50%;
+}
+
+.align-middle:nth-child(3) {
+    width: 20%;
+}
+
+.align-middle:nth-child(4) {
+    width: 15%;
+}
+
+.align-middle:nth-child(5) {
+    width: 15%;
 }
 
 .container {
@@ -15,17 +30,19 @@
     border-radius: 5px;
     margin: 20px auto;
     max-width: 1000px;
-    padding: 40px 40px 260px;
+    padding: 40px;
 }
 
 .container.row {
     padding: 40px 40px 0 40px;
 }
 
-@media (max-width: 600px) {
-    .container {
-        padding-bottom: 160px;
-    }
+.divider {
+    margin-bottom: 28px;
+}
+
+.images {
+    width: 80px;
 }
 
 .inactive {
@@ -54,6 +71,19 @@
     margin: auto 0 auto auto;
 }
 
+.rounded-top-left {
+    border-top-left-radius: 5px;
+}
+
+.rounded-top-right {
+    border-top-right-radius: 5px;
+}
+
+.text-muted span {
+    color: var(--dark-gray);
+    font-weight: bold;
+}
+
 .whatsapp {
     bottom: 20px;
     position: fixed;
@@ -70,36 +100,33 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h6 {
-    color: var(--dark-gray);
-    font-size: 14px;
-}
-
-h6:first-child {
+button {
     margin-bottom: 30px;
 }
 
-h6:nth-child(5) {
-    color: inherit;
-    font-weight: normal;
+h6 {
+    color: var(--dark-gray);
+    font-size: 20px;
+    text-align: center;
 }
 
-h6:nth-child(7) {
-    color: inherit;
-    font-weight: normal;
-}
-
-p {
-    font-size: 14px;
-}
-
-p a {
-    color: var(--light-orange);
-    font-weight: bold;
-    text-decoration: none;
+p:first-child {
+    margin-top: 20px;
 }
 
 p:last-child {
     color: var(--dark-gray);
     font-size: 12px;
+}
+
+p span:first-child {
+    font-size: 14px;
+}
+
+p span:last-child {
+    font-size: 24px;
+}
+
+thead {
+    background-color: var(--dark-gray);
 }

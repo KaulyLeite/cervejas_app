@@ -13,8 +13,8 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 8px;
-    max-height: 355px;
-    min-height: 355px;
+    max-height: 360px;
+    min-height: 360px;
     overflow: auto;
 }
 
@@ -37,7 +37,7 @@
 
     .card-img-container > img {
         height: auto;
-        margin: auto;
+        margin: 14px auto auto;
         max-width: 50%;
     }
 }
