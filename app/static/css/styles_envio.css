@@ -95,6 +95,14 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+button {
+    margin-bottom: 30px;
+}
+
+button:last-child {
+    margin-bottom: 25px;
+}
+
 h6 {
     color: var(--dark-gray);
     font-size: 20px;
