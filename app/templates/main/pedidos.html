@@ -96,33 +96,33 @@
     </div>
     <script>
         (function () {
-            'use strict'
-            let forms = document.querySelectorAll('.needs-validation')
+            'use strict';
+            let forms = document.querySelectorAll('.needs-validation');
             Array.prototype.slice.call(forms)
                 .forEach(function (form) {
                     form.addEventListener('submit', function (event) {
                         if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                            form.scrollIntoView({behavior: 'smooth', block: 'start'})
+                            event.preventDefault();
+                            event.stopPropagation();
+                            form.scrollIntoView({behavior: 'smooth', block: 'start'});
                         }
 
-                        let qtdeInputs = document.getElementsByClassName("input-qtde")
-                        let soma = 0
+                        let qtdeInputs = document.getElementsByClassName("input-qtde");
+                        let soma = 0;
                         for (let i = 0; i < qtdeInputs.length; i++) {
-                            soma += Number(qtdeInputs[i].value)
+                            soma += Number(qtdeInputs[i].value);
                         }
 
                         if (soma === 0) {
-                            alert('A quantidade de pelo menos um produto precisa ser maior que zero!')
-                            event.preventDefault()
-                            event.stopPropagation()
-                            form.scrollIntoView({behavior: 'smooth', block: 'start'})
+                            alert('A quantidade de pelo menos um produto precisa ser maior que zero!');
+                            event.preventDefault();
+                            event.stopPropagation();
+                            form.scrollIntoView({behavior: 'smooth', block: 'start'});
                         }
 
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
     </script>
 {% endblock %}
