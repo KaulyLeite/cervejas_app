@@ -41,7 +41,7 @@
                     <span>Endereço: </span>{{ endereco }}
                 </li>
                 <li class="text-muted">
-                    <span>Data do Pedido: </span>{{ data }}
+                    <span>Data e Hora do Pedido: </span>{{ data_hora }}
                 </li>
             </ul>
         </div>
@@ -92,7 +92,7 @@
                 <input type="hidden" name="endereco" value="{{ endereco }}">
                 <input type="hidden" name="cidade" value="{{ cidade }}">
                 <input type="hidden" name="estado" value="{{ estado }}">
-                <input type="hidden" name="data" value="{{ data }}">
+                <input type="hidden" name="data_hora" value="{{ data_hora }}">
                 <input type="hidden" name="total_pedido" value="{{ total_pedido }}">
                 <button type="submit" class="btn btn-secondary btn-lg">Enviar</button>
             </form>

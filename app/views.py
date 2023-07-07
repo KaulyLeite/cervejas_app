@@ -48,7 +48,7 @@ def confirmacao(request):
         cidade = request.POST['cidade']
         estado = request.POST['estado']
 
-        data = datetime.now().strftime('%d/%m/%Y')
+        data_hora = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
         produtos_selecionados = []
         for produto in produtos_confirmados:
@@ -71,7 +71,7 @@ def confirmacao(request):
                        'endereco': endereco,
                        'cidade': cidade,
                        'estado': estado,
-                       'data': data,
+                       'data_hora': data_hora,
                        'produtos': produtos_selecionados,
                        'total_pedido': total_pedido
                        })
@@ -87,12 +87,12 @@ def envio(request):
         endereco = request.POST['endereco']
         cidade = request.POST['cidade']
         estado = request.POST['estado']
-        data = request.POST['data']
+        data_hora = request.POST['data_hora']
         produtos_selecionados = Produto.objects.filter(pedido=pedido)
         total_pedido = request.POST['total_pedido']
 
         envio_email(pedido, nome, email, telefone, endereco,
-                    cidade, estado, data, produtos_selecionados, total_pedido)
+                    cidade, estado, data_hora, produtos_selecionados, total_pedido)
 
         return render(request, TEMPLATE_ENVIO, {
             'pedido': pedido,
@@ -102,14 +102,14 @@ def envio(request):
             'endereco': endereco,
             'cidade': cidade,
             'estado': estado,
-            'data': data,
+            'data_hora': data_hora,
             'produtos': produtos_selecionados,
             'total_pedido': total_pedido
         })
 
 
 def envio_email(pedido, nome, email, telefone, endereco,
-                cidade, estado, data, produtos_selecionados, total_pedido):
+                cidade, estado, data_hora, produtos_selecionados, total_pedido):
     language_code = settings.LANGUAGE_CODE
     locale.setlocale(locale.LC_ALL, language_code)
 
@@ -125,7 +125,7 @@ def envio_email(pedido, nome, email, telefone, endereco,
     descricao += f'Telefone: {telefone}<br>'
     descricao += f'Endereço: {endereco}<br>'
     descricao += f'Cidade, Estado: {cidade}, {estado}<br>'
-    descricao += f'Data: {data}<br>'
+    descricao += f'Data e Hora: {data_hora}<br>'
     descricao += '<br>'
 
     for produto in produtos_selecionados:
