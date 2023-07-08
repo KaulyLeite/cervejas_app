@@ -19,25 +19,39 @@ TEMPLATE_ENVIO = 'main/envio.html'
 # Create your views here.
 def index(request):
     marcas = Marca.objects.all()
+
     return render(request, TEMPLATE_BASE, {'marcas': marcas})
 
 
 def produtos(request):
     produtos_listados = Produto.objects.all()
+
     return render(request, TEMPLATE_PRODUTOS, {'produtos': produtos_listados})
 
 
 def sobre(request):
-    return render(request, TEMPLATE_SOBRE)
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    email = config['SOBRE']['email']
+    telefone = config['SOBRE']['telefone']
+    whatsapp = config['SOBRE']['whatsapp']
+
+    return render(request, TEMPLATE_SOBRE,
+                  {'email': email,
+                   'telefone': telefone,
+                   'whatsapp': whatsapp
+                   })
 
 
 def pedidos(request):
     produtos_pedidos = Produto.objects.all()
+
     return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos_pedidos})
 
 
 def confirmacao(request):
     produtos_confirmados = Produto.objects.all()
+
     if request.method == 'POST':
         pedido = uuid.uuid4().hex[:8].upper()
 
