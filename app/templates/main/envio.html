@@ -4,8 +4,8 @@
 {% block styles %}
     <link href="{% static 'css/styles_envio.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
-{% block home %}
-    <a class="nav-link inactive" href="{% url 'home' %}">Principal</a>
+{% block index %}
+    <a class="nav-link inactive" href="{% url 'index' %}">Principal</a>
 {% endblock %}
 {% block pedidos %}
     <a class="nav-link active" href="{% url 'pedidos' %}" aria-current="page">Pedidos</a>
@@ -62,7 +62,7 @@
             <button onclick="gerar('pdf')" class="btn btn-secondary btn-lg">Gerar PDF</button>
         </div>
         <div class="d-flex justify-content-start">
-            <button onclick="home()" class="btn btn-secondary btn-md">Sair</button>
+            <button onclick="index()" class="btn btn-secondary btn-md">Sair</button>
         </div>
         <hr>
         <p>&copy; Carlos Cervejas Especiais 2023</p>

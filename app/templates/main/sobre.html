@@ -4,8 +4,8 @@
 {% block styles %}
     <link href="{% static 'css/styles_sobre.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
-{% block home %}
-    <a class="nav-link inactive" href="{% url 'home' %}">Principal</a>
+{% block index %}
+    <a class="nav-link inactive" href="{% url 'index' %}">Principal</a>
 {% endblock %}
 {% block sobre %}
     <a class="nav-link active" href="{% url 'sobre' %}" aria-current="page">Sobre</a>

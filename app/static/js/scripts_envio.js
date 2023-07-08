@@ -30,6 +30,6 @@ function gerar(id) {
     };
 }
 
-function home() {
+function index() {
     window.location.href = '/';
 }
