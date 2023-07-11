@@ -21,14 +21,17 @@ def index(request):
     marcas = Marca.objects.all()
 
     nomes_marcas = [marca.nome for marca in marcas]
-    num_marcas = len(nomes_marcas)
 
-    if num_marcas > 1:
-        ultima_marca = nomes_marcas.pop()
-        nomes_marcas = ', '.join(nomes_marcas)
-        nomes_marcas += f' e {ultima_marca}'
+    if nomes_marcas:
+        num_marcas = len(nomes_marcas)
+        if num_marcas > 1:
+            ultima_marca = nomes_marcas.pop()
+            nomes_marcas = ', '.join(nomes_marcas)
+            nomes_marcas += f' e {ultima_marca}'
+        else:
+            nomes_marcas = nomes_marcas[0]
     else:
-        nomes_marcas = nomes_marcas[0]
+        nomes_marcas = ""
 
     titulo = f"A Carlos Cervejas Especiais é distribuidora exclusiva das cervejas {nomes_marcas}" \
              f" em toda a região de Garopaba e Imbituba - Santa Catarina."
@@ -48,9 +51,15 @@ def produtos(request):
 def sobre(request):
     config = configparser.ConfigParser()
     config.read('config.ini')
-    email = config['SOBRE']['email']
-    telefone = config['SOBRE']['telefone']
-    whatsapp = config['SOBRE']['whatsapp']
+
+    if 'SOBRE' in config:
+        email = config['SOBRE'].get('email')
+        telefone = config['SOBRE'].get('telefone')
+        whatsapp = config['SOBRE'].get('whatsapp')
+    else:
+        email = ''
+        telefone = ''
+        whatsapp = ''
 
     return render(request, TEMPLATE_SOBRE, {
         'email': email,

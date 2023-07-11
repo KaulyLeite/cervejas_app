@@ -23,7 +23,9 @@
     border: var(--border-thickness) solid lightgray;
     border-radius: 100%;
     display: block;
+    height: 200px;
     margin: 0 auto;
+    width: 200px;
 }
 
 .inactive {
