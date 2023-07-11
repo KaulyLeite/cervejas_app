@@ -45,6 +45,42 @@
     opacity: 90%;
 }
 
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.input-button {
+    background-color: var(--dark-gray);
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    height: 30px;
+    margin: 5px;
+    width: 30px;
+}
+
+.input-qtde {
+    border-color: var(--very-light-gray);
+    border-radius: 5px;
+    border-width: var(--border-thickness);
+    height: 30px;
+    text-align: center;
+    width: 40px;
+}
+
+.input-qtde:focus {
+    border-color: var(--dark-gray);
+    outline: none;
+}
+
 .logo {
     width: 238px;
 }

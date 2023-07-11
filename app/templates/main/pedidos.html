@@ -77,10 +77,14 @@
                                 </label>R$ {{ produto.valor }}
                             </td>
                             <td class="align-middle">
-                                <label for="{{ forloop.counter }}_qtde"></label>
+                                <input onclick="decrementar('{{ forloop.counter }}_qtde')" class="input-button"
+                                       type="button" value="-">
+                                <label for="{{ forloop.counter }}_qtde" hidden></label>
                                 <input name="{{ forloop.counter }}_qtde" id="{{ forloop.counter }}_qtde"
-                                       class="col-md-5 text-center input-qtde" type="number" min="0" max="99" value="0"
-                                       oninput="this.value = Math.abs(this.value)" required>
+                                       class="input-qtde" type="number" min="0" max="99" value="0" maxlength="2"
+                                       oninput="this.value = Math.abs(this.value); validarQtde(this)" required>
+                                <input onclick="incrementar('{{ forloop.counter }}_qtde')" class="input-button"
+                                       type="button" value="+">
                             </td>
                         </tr>
                     {% endfor %}
@@ -124,5 +128,25 @@
                     }, false);
                 });
         })();
+
+        function validarQtde(input) {
+            if (input.value.length > 2) {
+                input.value = input.value.slice(0, 2);
+            }
+        }
+
+        function decrementar(input_qtde) {
+            const input = document.getElementById(input_qtde);
+            if (input.value > 0) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function incrementar(input_qtde) {
+            const input = document.getElementById(input_qtde);
+            if (input.value < 99) {
+                input.value = parseInt(input.value) + 1;
+            }
+        }
     </script>
 {% endblock %}
