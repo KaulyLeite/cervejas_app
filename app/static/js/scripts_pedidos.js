@@ -70,6 +70,22 @@
     });
 })();
 
+function formatarTelefone() {
+    const input = document.getElementById('telefone');
+    let telefone = input.value.replace(/\D/g, '');
+    const tamanho = telefone.length;
+
+    if (tamanho > 10) {
+        telefone = telefone.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+    } else if (tamanho > 6) {
+        telefone = telefone.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+    } else if (tamanho > 2) {
+        telefone = telefone.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+    }
+
+    input.value = telefone;
+}
+
 function validarQtde(input) {
     if (input.value.length > 2) {
         input.value = input.value.slice(0, 2);
