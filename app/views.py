@@ -20,7 +20,23 @@ TEMPLATE_ENVIO = 'main/envio.html'
 def index(request):
     marcas = Marca.objects.all()
 
-    return render(request, TEMPLATE_BASE, {'marcas': marcas})
+    nomes_marcas = [marca.nome for marca in marcas]
+    num_marcas = len(nomes_marcas)
+
+    if num_marcas > 1:
+        ultima_marca = nomes_marcas.pop()
+        nomes_marcas = ', '.join(nomes_marcas)
+        nomes_marcas += f' e {ultima_marca}'
+    else:
+        nomes_marcas = nomes_marcas[0]
+
+    titulo = f"A Carlos Cervejas Especiais é distribuidora exclusiva das cervejas {nomes_marcas}" \
+             f" em toda a região de Garopaba e Imbituba - Santa Catarina."
+
+    return render(request, TEMPLATE_BASE, {
+        'marcas': marcas,
+        'titulo': titulo
+    })
 
 
 def produtos(request):
@@ -36,11 +52,11 @@ def sobre(request):
     telefone = config['SOBRE']['telefone']
     whatsapp = config['SOBRE']['whatsapp']
 
-    return render(request, TEMPLATE_SOBRE,
-                  {'email': email,
-                   'telefone': telefone,
-                   'whatsapp': whatsapp
-                   })
+    return render(request, TEMPLATE_SOBRE, {
+        'email': email,
+        'telefone': telefone,
+        'whatsapp': whatsapp
+    })
 
 
 def pedidos(request):
@@ -77,18 +93,18 @@ def confirmacao(request):
 
         total_pedido = sum(produto.total for produto in produtos_selecionados)
 
-        return render(request, TEMPLATE_CONFIRMACAO,
-                      {'pedido': pedido,
-                       'nome': nome,
-                       'email': email,
-                       'telefone': telefone,
-                       'endereco': endereco,
-                       'cidade': cidade,
-                       'estado': estado,
-                       'data_hora': data_hora,
-                       'produtos': produtos_selecionados,
-                       'total_pedido': total_pedido
-                       })
+        return render(request, TEMPLATE_CONFIRMACAO, {
+            'pedido': pedido,
+            'nome': nome,
+            'email': email,
+            'telefone': telefone,
+            'endereco': endereco,
+            'cidade': cidade,
+            'estado': estado,
+            'data_hora': data_hora,
+            'produtos': produtos_selecionados,
+            'total_pedido': total_pedido
+        })
     return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos})
 
 

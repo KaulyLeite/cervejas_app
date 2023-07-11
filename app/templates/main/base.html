@@ -51,12 +51,7 @@
 
 {% block content %}
     <div class="container">
-        <p>A Carlos Cervejas Especiais é distribuidora exclusiva das cervejas
-            {% for marca in marcas %}
-                {{ marca.nome }}{% if not forloop.last %}{% if not forloop.first %}{% if forloop.revcounter == 2 %} e
-                {% else %}, {% endif %}{% else %}, {% endif %}{% endif %}
-            {% endfor %}
-            em toda a região de Garopaba e Imbituba - Santa Catarina.</p>
+        <p>{{ titulo }}</p>
         <p>Oferecemos as melhores opções de cervejas artesanais do mercado com ótimo preço e qualidade.</p>
         <button onclick="produtos()" class="btn btn-secondary" type="button">
             <a class="text-button">Conheça a nossa linha de cervejas especiais!</a>
