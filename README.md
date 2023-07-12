@@ -46,6 +46,27 @@ Open in a browser:
 http://127.0.0.1:8000/
 ```
 
+## Management
+
+### Brands and Products:
+
+The data for brands and products must be registered through Django Admin.
+
+### About Page Information Configuration:
+
+The data for rendering e-mail, phone, and WhatsApp information on the About page can be registered through a "config.ini" file as shown in the example below:
+
+```sh
+[SOBRE]
+email = email@email.com
+telefone = (99) 99999-9999
+whatsapp = 5599999999999
+```
+
+### Email Order Sending Configuration:
+
+The data for configuring the email address and password for sending the order by email must be used through environment variables.
+
 ## Screenshots
 
 Main page:
@@ -81,6 +102,12 @@ Order confirmation page:
 Order submission page:
 
 ![envio](https://github.com/KaulyLeite/cervejas_app/assets/33230557/8a088c4f-5b87-48b3-865f-6b134cd929b4)
+
+<br>
+
+Order submission error page:
+
+![erro](https://github.com/KaulyLeite/cervejas_app/assets/33230557/519edd18-fc49-4b06-ac82-52f7f17ddb07)
 
 <br>
 
