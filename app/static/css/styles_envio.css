@@ -1,6 +1,7 @@
 :root {
     --border-thickness: 0.03em;
     --dark-gray: #6C757D;
+    --light-orange: #FFA74F;
     --pale-orange: #FFEBB5;
     --very-light-gray: #F6F6F6;
     --very-light-orange: #FFD6AD;
@@ -109,6 +110,12 @@ h6 {
     text-align: center;
 }
 
+p a {
+    color: var(--light-orange);
+    font-weight: bold;
+    text-decoration: none;
+}
+
 p:first-child {
     margin-top: 20px;
 }
@@ -116,6 +123,11 @@ p:first-child {
 p:last-child {
     color: var(--dark-gray);
     font-size: 12px;
+}
+
+p:nth-of-type(2) {
+    color: inherit;
+    font-size: 14px;
 }
 
 p span:first-child {

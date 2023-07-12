@@ -5,11 +5,13 @@ from django.shortcuts import render
 import configparser
 import email as emailpkg
 import locale
+import logging
 import smtplib
 import uuid
 
 APP_NAME = settings.APP_NAME
 APP_VERSION = settings.APP_VERSION
+LOGGER = logging.getLogger(__name__)
 TEMPLATE_BASE = 'main/base.html'
 TEMPLATE_PRODUTOS = 'main/produtos.html'
 TEMPLATE_SOBRE = 'main/sobre.html'
@@ -150,8 +152,19 @@ def envio(request):
         produtos_selecionados = Produto.objects.filter(pedido=pedido)
         total_pedido = request.POST['total_pedido']
 
-        envio_email(pedido, nome, email, telefone, endereco,
-                    cidade, estado, data_hora, produtos_selecionados, total_pedido)
+        try:
+            envio_email(pedido, nome, email, telefone, endereco,
+                        cidade, estado, data_hora, produtos_selecionados, total_pedido)
+        except Exception as e:
+            erro_descricao = str(e)
+            LOGGER.error('Ocorreu um erro ao enviar o pedido: %s', erro_descricao)
+            return render(request, TEMPLATE_ENVIO, {
+                'name': APP_NAME,
+                'version': APP_VERSION,
+                'pedido': pedido,
+                'erro_envio': True,
+                'erro_descricao': erro_descricao
+            })
 
         return render(request, TEMPLATE_ENVIO, {
             'name': APP_NAME,
