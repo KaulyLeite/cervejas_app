@@ -8,6 +8,8 @@ import locale
 import smtplib
 import uuid
 
+APP_NAME = settings.APP_NAME
+APP_VERSION = settings.APP_VERSION
 TEMPLATE_BASE = 'main/base.html'
 TEMPLATE_PRODUTOS = 'main/produtos.html'
 TEMPLATE_SOBRE = 'main/sobre.html'
@@ -37,6 +39,8 @@ def index(request):
              f" em toda a região de Garopaba e Imbituba - Santa Catarina."
 
     return render(request, TEMPLATE_BASE, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
         'marcas': marcas,
         'titulo': titulo
     })
@@ -45,7 +49,11 @@ def index(request):
 def produtos(request):
     produtos_listados = Produto.objects.all()
 
-    return render(request, TEMPLATE_PRODUTOS, {'produtos': produtos_listados})
+    return render(request, TEMPLATE_PRODUTOS, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
+        'produtos': produtos_listados
+    })
 
 
 def sobre(request):
@@ -62,6 +70,8 @@ def sobre(request):
         whatsapp = ''
 
     return render(request, TEMPLATE_SOBRE, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
         'email': email,
         'telefone': telefone,
         'whatsapp': whatsapp
@@ -71,7 +81,11 @@ def sobre(request):
 def pedidos(request):
     produtos_pedidos = Produto.objects.all()
 
-    return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos_pedidos})
+    return render(request, TEMPLATE_PEDIDOS, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
+        'produtos': produtos_pedidos
+    })
 
 
 def confirmacao(request):
@@ -103,6 +117,8 @@ def confirmacao(request):
         total_pedido = sum(produto.total for produto in produtos_selecionados)
 
         return render(request, TEMPLATE_CONFIRMACAO, {
+            'name': APP_NAME,
+            'version': APP_VERSION,
             'pedido': pedido,
             'nome': nome,
             'email': email,
@@ -114,7 +130,11 @@ def confirmacao(request):
             'produtos': produtos_selecionados,
             'total_pedido': total_pedido
         })
-    return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos})
+    return render(request, TEMPLATE_PEDIDOS, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
+        'produtos': produtos
+    })
 
 
 def envio(request):
@@ -134,6 +154,8 @@ def envio(request):
                     cidade, estado, data_hora, produtos_selecionados, total_pedido)
 
         return render(request, TEMPLATE_ENVIO, {
+            'name': APP_NAME,
+            'version': APP_VERSION,
             'pedido': pedido,
             'nome': nome,
             'email': email,
