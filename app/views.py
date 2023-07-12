@@ -6,6 +6,7 @@ import configparser
 import email as emailpkg
 import locale
 import logging
+import os
 import smtplib
 import uuid
 
@@ -219,9 +220,9 @@ def envio_email(pedido, nome, email, telefone, endereco,
 
     config = configparser.ConfigParser()
     config.read('config.ini')
-    remetente = config['EMAIL']['remetente']
+    remetente = os.getenv('EMAIL_REMETENTE', '')
+    senha = os.getenv('EMAIL_SENHA', '')
     destinatarios = [remetente, email]
-    senha = config['EMAIL']['senha']
 
     mensagem['From'] = remetente
     mensagem['To'] = ', '.join(destinatarios)
