@@ -5,9 +5,13 @@ from django.shortcuts import render
 import configparser
 import email as emailpkg
 import locale
+import logging
 import smtplib
 import uuid
 
+APP_NAME = settings.APP_NAME
+APP_VERSION = settings.APP_VERSION
+LOGGER = logging.getLogger(__name__)
 TEMPLATE_BASE = 'main/base.html'
 TEMPLATE_PRODUTOS = 'main/produtos.html'
 TEMPLATE_SOBRE = 'main/sobre.html'
@@ -19,25 +23,76 @@ TEMPLATE_ENVIO = 'main/envio.html'
 # Create your views here.
 def index(request):
     marcas = Marca.objects.all()
-    return render(request, TEMPLATE_BASE, {'marcas': marcas})
+
+    nomes_marcas = [marca.nome for marca in marcas]
+
+    if nomes_marcas:
+        num_marcas = len(nomes_marcas)
+        if num_marcas > 1:
+            ultima_marca = nomes_marcas.pop()
+            nomes_marcas = ', '.join(nomes_marcas)
+            nomes_marcas += f' e {ultima_marca}'
+        else:
+            nomes_marcas = nomes_marcas[0]
+    else:
+        nomes_marcas = ""
+
+    titulo = f"A Carlos Cervejas Especiais é distribuidora exclusiva das cervejas {nomes_marcas}" \
+             f" em toda a região de Garopaba e Imbituba - Santa Catarina."
+
+    return render(request, TEMPLATE_BASE, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
+        'marcas': marcas,
+        'titulo': titulo
+    })
 
 
 def produtos(request):
     produtos_listados = Produto.objects.all()
-    return render(request, TEMPLATE_PRODUTOS, {'produtos': produtos_listados})
+
+    return render(request, TEMPLATE_PRODUTOS, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
+        'produtos': produtos_listados
+    })
 
 
 def sobre(request):
-    return render(request, TEMPLATE_SOBRE)
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+
+    if 'SOBRE' in config:
+        email = config['SOBRE'].get('email')
+        telefone = config['SOBRE'].get('telefone')
+        whatsapp = config['SOBRE'].get('whatsapp')
+    else:
+        email = ''
+        telefone = ''
+        whatsapp = ''
+
+    return render(request, TEMPLATE_SOBRE, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
+        'email': email,
+        'telefone': telefone,
+        'whatsapp': whatsapp
+    })
 
 
 def pedidos(request):
     produtos_pedidos = Produto.objects.all()
-    return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos_pedidos})
+
+    return render(request, TEMPLATE_PEDIDOS, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
+        'produtos': produtos_pedidos
+    })
 
 
 def confirmacao(request):
     produtos_confirmados = Produto.objects.all()
+
     if request.method == 'POST':
         pedido = uuid.uuid4().hex[:8].upper()
 
@@ -48,7 +103,7 @@ def confirmacao(request):
         cidade = request.POST['cidade']
         estado = request.POST['estado']
 
-        data = datetime.now().strftime('%d/%m/%Y')
+        data_hora = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
         produtos_selecionados = []
         for produto in produtos_confirmados:
@@ -63,19 +118,25 @@ def confirmacao(request):
 
         total_pedido = sum(produto.total for produto in produtos_selecionados)
 
-        return render(request, TEMPLATE_CONFIRMACAO,
-                      {'pedido': pedido,
-                       'nome': nome,
-                       'email': email,
-                       'telefone': telefone,
-                       'endereco': endereco,
-                       'cidade': cidade,
-                       'estado': estado,
-                       'data': data,
-                       'produtos': produtos_selecionados,
-                       'total_pedido': total_pedido
-                       })
-    return render(request, TEMPLATE_PEDIDOS, {'produtos': produtos})
+        return render(request, TEMPLATE_CONFIRMACAO, {
+            'name': APP_NAME,
+            'version': APP_VERSION,
+            'pedido': pedido,
+            'nome': nome,
+            'email': email,
+            'telefone': telefone,
+            'endereco': endereco,
+            'cidade': cidade,
+            'estado': estado,
+            'data_hora': data_hora,
+            'produtos': produtos_selecionados,
+            'total_pedido': total_pedido
+        })
+    return render(request, TEMPLATE_PEDIDOS, {
+        'name': APP_NAME,
+        'version': APP_VERSION,
+        'produtos': produtos
+    })
 
 
 def envio(request):
@@ -87,14 +148,27 @@ def envio(request):
         endereco = request.POST['endereco']
         cidade = request.POST['cidade']
         estado = request.POST['estado']
-        data = request.POST['data']
+        data_hora = request.POST['data_hora']
         produtos_selecionados = Produto.objects.filter(pedido=pedido)
         total_pedido = request.POST['total_pedido']
 
-        envio_email(pedido, nome, email, telefone, endereco,
-                    cidade, estado, data, produtos_selecionados, total_pedido)
+        try:
+            envio_email(pedido, nome, email, telefone, endereco,
+                        cidade, estado, data_hora, produtos_selecionados, total_pedido)
+        except Exception as e:
+            erro_descricao = str(e)
+            LOGGER.error('Ocorreu um erro ao enviar o pedido: %s', erro_descricao)
+            return render(request, TEMPLATE_ENVIO, {
+                'name': APP_NAME,
+                'version': APP_VERSION,
+                'pedido': pedido,
+                'erro_envio': True,
+                'erro_descricao': erro_descricao
+            })
 
         return render(request, TEMPLATE_ENVIO, {
+            'name': APP_NAME,
+            'version': APP_VERSION,
             'pedido': pedido,
             'nome': nome,
             'email': email,
@@ -102,14 +176,14 @@ def envio(request):
             'endereco': endereco,
             'cidade': cidade,
             'estado': estado,
-            'data': data,
+            'data_hora': data_hora,
             'produtos': produtos_selecionados,
             'total_pedido': total_pedido
         })
 
 
 def envio_email(pedido, nome, email, telefone, endereco,
-                cidade, estado, data, produtos_selecionados, total_pedido):
+                cidade, estado, data_hora, produtos_selecionados, total_pedido):
     language_code = settings.LANGUAGE_CODE
     locale.setlocale(locale.LC_ALL, language_code)
 
@@ -125,7 +199,7 @@ def envio_email(pedido, nome, email, telefone, endereco,
     descricao += f'Telefone: {telefone}<br>'
     descricao += f'Endereço: {endereco}<br>'
     descricao += f'Cidade, Estado: {cidade}, {estado}<br>'
-    descricao += f'Data: {data}<br>'
+    descricao += f'Data e Hora: {data_hora}<br>'
     descricao += '<br>'
 
     for produto in produtos_selecionados:

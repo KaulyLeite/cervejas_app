@@ -4,8 +4,8 @@
 {% block styles %}
     <link href="{% static 'css/styles_pedidos.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
-{% block home %}
-    <a class="nav-link inactive" href="{% url 'home' %}">Principal</a>
+{% block index %}
+    <a class="nav-link inactive" href="{% url 'index' %}">Principal</a>
 {% endblock %}
 {% block pedidos %}
     <a class="nav-link active" href="{% url 'pedidos' %}" aria-current="page">Pedidos</a>
@@ -20,27 +20,30 @@
             <div class="row my-3 mx-1 justify-content-center">
                 <div class="form-group col-md-4">
                     <label for="nome">Nome</label>
-                    <input class="form-control" type="text" name="nome" id="nome" required>
+                    <input class="form-control" type="text" name="nome" id="nome" maxlength="50" required>
                 </div>
                 <div class="form-group col-md-5">
                     <label for="email">E-mail</label>
-                    <input class="form-control" type="email" name="email" id="email" required>
+                    <input class="form-control" type="email" name="email" id="email" maxlength="254" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="telefone">Telefone</label>
-                    <input class="form-control" type="text" name="telefone" id="telefone" required>
+                    <input class="form-control" type="text" name="telefone" id="telefone"
+                           oninput="formatarTelefone()" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="endereco">Endereço</label>
-                    <input class="form-control" type="text" name="endereco" id="endereco" required>
+                    <input class="form-control" type="text" name="endereco" id="endereco" maxlength="100" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cidade">Cidade</label>
-                    <input class="form-control" type="text" name="cidade" id="cidade" required>
+                    <input class="form-control" type="text" name="cidade" id="cidade" maxlength="50" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="estado">Estado</label>
-                    <input class="form-control" type="text" name="estado" id="estado" required>
+                    <select class="form-control" name="estado" id="estado" required>
+                        <option value="">Selecione um Estado</option>
+                    </select>
                 </div>
             </div>
             <br/>
@@ -77,10 +80,14 @@
                                 </label>R$ {{ produto.valor }}
                             </td>
                             <td class="align-middle">
-                                <label for="{{ forloop.counter }}_qtde"></label>
+                                <input onclick="decrementar('{{ forloop.counter }}_qtde')" class="input-button"
+                                       type="button" value="-">
+                                <label for="{{ forloop.counter }}_qtde" hidden></label>
                                 <input name="{{ forloop.counter }}_qtde" id="{{ forloop.counter }}_qtde"
-                                       class="col-md-5 text-center input-qtde" type="number" min="0" max="99" value="0"
-                                       oninput="this.value = Math.abs(this.value)" required>
+                                       class="input-qtde" type="number" min="0" max="99" value="0" maxlength="2"
+                                       oninput="this.value = Math.abs(this.value); validarQtde(this)" required>
+                                <input onclick="incrementar('{{ forloop.counter }}_qtde')" class="input-button"
+                                       type="button" value="+">
                             </td>
                         </tr>
                     {% endfor %}
@@ -92,37 +99,7 @@
             </div>
         </form>
         <hr>
-        <p>&copy; Carlos Cervejas Especiais 2023</p>
+        <p>&copy; {{ name }} 2023 - v{{ version }}</p>
     </div>
-    <script>
-        (function () {
-            'use strict'
-            let forms = document.querySelectorAll('.needs-validation')
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                            form.scrollIntoView({behavior: 'smooth', block: 'start'})
-                        }
-
-                        let qtdeInputs = document.getElementsByClassName("input-qtde")
-                        let soma = 0
-                        for (let i = 0; i < qtdeInputs.length; i++) {
-                            soma += Number(qtdeInputs[i].value)
-                        }
-
-                        if (soma === 0) {
-                            alert('A quantidade de pelo menos um produto precisa ser maior que zero!')
-                            event.preventDefault()
-                            event.stopPropagation()
-                            form.scrollIntoView({behavior: 'smooth', block: 'start'})
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
-    </script>
+    <script src="{% static 'js/scripts_pedidos.js' %}"></script>
 {% endblock %}

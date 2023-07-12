@@ -1,6 +1,6 @@
 :root {
     --border-thickness: 0.03em;
-    --dark-gray: #808080;
+    --dark-gray: #6C757D;
     --pale-orange: #FFEBB5;
     --very-light-gray: #F6F6F6;
     --very-light-orange: #FFD6AD;
@@ -23,7 +23,9 @@
     border: var(--border-thickness) solid lightgray;
     border-radius: 100%;
     display: block;
+    height: 200px;
     margin: 0 auto;
+    width: 200px;
 }
 
 .inactive {
@@ -96,7 +98,7 @@ p:last-child {
     font-size: 12px;
 }
 
-p:nth-child(2) {
+p:nth-last-child(2) {
     color: var(--dark-gray);
     font-size: 16px;
 }
