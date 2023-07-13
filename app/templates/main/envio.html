@@ -1,0 +1,85 @@
+{% extends "main/base.html" %}
+{% load static %}
+<title>{% block title %}Envio - Carlos Cervejas Especiais{% endblock %}</title>
+{% block styles %}
+    <link href="{% static 'css/styles_envio.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block index %}
+    <a class="nav-link inactive" href="{% url 'index' %}">Principal</a>
+{% endblock %}
+{% block pedidos %}
+    <a class="nav-link active" href="{% url 'pedidos' %}" aria-current="page">Pedidos</a>
+{% endblock %}
+{% block content %}
+    <div class="container row">
+        {% if erro_envio %}
+            <div class="d-flex justify-content-center">
+                <h6>Ocorreu um erro ao enviar o pedido!</h6>
+            </div>
+            <div class="row d-flex align-items-baseline">
+                <p>Pedido: <strong>{{ pedido }}</strong></p>
+                <hr class="divider">
+                <p>&#8226; Desculpe, ocorreu um erro ao enviar a sua solicitação de pedido. Por favor tente novamente em
+                    alguns minutos, ou, caso o erro persista, entre em contato por meio de nossos
+                    <a href="{% url 'sobre' %}">canais</a>.
+                </p>
+            </div>
+        {% else %}
+            <div class="d-flex justify-content-center">
+                <h6>Pedido enviado com sucesso!</h6>
+            </div>
+            <div id="pdf">
+                <div class="row d-flex align-items-baseline">
+                    <p>Pedido: <strong>{{ pedido }}</strong></p>
+                    <hr class="divider">
+                </div>
+                <div class="row my-3 mx-1 justify-content-center">
+                    <table class="table table-striped table-borderless" aria-describedby="table">
+                        <thead class="text-white">
+                        <tr>
+                            <th class="rounded-top-left" scope="col"></th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Valor Unit.</th>
+                            <th scope="col">Qtde.</th>
+                            <th class="rounded-top-right" scope="col">Valor Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for produto in produtos %}
+                            <tr>
+                                <th class="align-middle" scope="row">
+                                    <div class="card-img-container images">
+                                        <img class="img-fluid rounded-start" src="{{ produto.imagem.url }}"
+                                             alt="{{ produto.nome }}">
+                                    </div>
+                                </th>
+                                <td class="align-middle">{{ produto.nome }}</td>
+                                <td class="align-middle">R$ {{ produto.valor }}</td>
+                                <td class="align-middle">{{ produto.qtde }}</td>
+                                <td class="align-middle">R$ {{ produto.total }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-xl-11">
+                            <p class="text-black float-end">
+                                <span class="text-black me-3">Valor Total do Pedido: </span>
+                                <span>R$ {{ total_pedido }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button onclick="gerar('pdf', '{{ pedido }}')" class="btn btn-secondary btn-lg">Gerar PDF</button>
+            </div>
+        {% endif %}
+        <div class="d-flex justify-content-start">
+            <button onclick="index()" class="btn btn-secondary btn-md">Sair</button>
+        </div>
+        <hr>
+        <p>&copy; {{ name }} 2023 - v{{ version }}</p>
+    </div>
+    <script src="{% static 'js/scripts_envio.js' %}"></script>
+{% endblock %}
