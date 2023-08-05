@@ -4,6 +4,27 @@
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
             form.addEventListener('submit', function (event) {
+                let inputs = form.querySelectorAll('.form-control');
+                let camposEmBranco = false;
+
+                inputs.forEach(function (input) {
+                    if (input.value.trim() === '') {
+                        camposEmBranco = true;
+                        input.classList.add('is-invalid');
+                        input.classList.remove('is-valid');
+                    } else {
+                        input.classList.remove('is-invalid');
+                        input.classList.add('is-valid');
+                    }
+                });
+
+                if (camposEmBranco) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    form.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    return;
+                }
+
                 if (!form.checkValidity()) {
                     event.preventDefault();
                     event.stopPropagation();
