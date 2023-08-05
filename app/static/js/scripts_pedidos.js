@@ -19,26 +19,50 @@
                         input.classList.add('is-valid');
                     }
 
-                    if (input.hasAttribute('minlength') && input.value.trim().length < input.getAttribute('minlength')) {
+                    if (input.hasAttribute('minlength') &&
+                        input.value.trim().length < input.getAttribute('minlength')) {
+                        camposEmBranco = true;
                         input.classList.add('is-invalid');
                         input.classList.remove('is-valid');
-                        camposEmBranco = true;
                     }
 
-                    input.addEventListener('input', function () {
-                        if (input.value.trim() === '') {
+                    if (input.getAttribute('type') === 'email') {
+                        let formatoEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                        if (!formatoEmail.test(input.value.trim())) {
+                            camposEmBranco = true;
                             input.classList.add('is-invalid');
                             input.classList.remove('is-valid');
-                        } else {
-                            input.classList.remove('is-invalid');
-                            input.classList.add('is-valid');
                         }
+                    }
 
-                        if (input.hasAttribute('minlength') && input.value.trim().length < input.getAttribute('minlength')) {
-                            input.classList.add('is-invalid');
-                            input.classList.remove('is-valid');
-                        }
-                    });
+                    if (input.getAttribute('type') === 'email') {
+                        input.addEventListener('input', function () {
+                            let formatoEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                            if (!formatoEmail.test(input.value.trim())) {
+                                input.classList.add('is-invalid');
+                                input.classList.remove('is-valid');
+                            } else {
+                                input.classList.remove('is-invalid');
+                                input.classList.add('is-valid');
+                            }
+                        });
+                    } else {
+                        input.addEventListener('input', function () {
+                            if (input.value.trim() === '') {
+                                input.classList.add('is-invalid');
+                                input.classList.remove('is-valid');
+                            } else {
+                                input.classList.remove('is-invalid');
+                                input.classList.add('is-valid');
+                            }
+
+                            if (input.hasAttribute('minlength') &&
+                                input.value.trim().length < input.getAttribute('minlength')) {
+                                input.classList.add('is-invalid');
+                                input.classList.remove('is-valid');
+                            }
+                        });
+                    }
                 });
 
                 if (camposEmBranco) {
