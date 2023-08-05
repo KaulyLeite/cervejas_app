@@ -4,6 +4,8 @@
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
             form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
                 let inputs = form.querySelectorAll('.form-control');
                 let camposEmBranco = false;
 
@@ -16,19 +18,37 @@
                         input.classList.remove('is-invalid');
                         input.classList.add('is-valid');
                     }
+
+                    if (input.hasAttribute('minlength') && input.value.trim().length < input.getAttribute('minlength')) {
+                        input.classList.add('is-invalid');
+                        input.classList.remove('is-valid');
+                        camposEmBranco = true;
+                    }
+
+                    input.addEventListener('input', function () {
+                        if (input.value.trim() === '') {
+                            input.classList.add('is-invalid');
+                            input.classList.remove('is-valid');
+                        } else {
+                            input.classList.remove('is-invalid');
+                            input.classList.add('is-valid');
+                        }
+
+                        if (input.hasAttribute('minlength') && input.value.trim().length < input.getAttribute('minlength')) {
+                            input.classList.add('is-invalid');
+                            input.classList.remove('is-valid');
+                        }
+                    });
                 });
 
                 if (camposEmBranco) {
-                    event.preventDefault();
-                    event.stopPropagation();
                     form.scrollIntoView({behavior: 'smooth', block: 'start'});
                     return;
                 }
 
                 if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
                     form.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    return;
                 }
 
                 let qtdeInputs = document.getElementsByClassName("input-qtde");
@@ -39,13 +59,13 @@
 
                 if (soma === 0) {
                     alert('A quantidade de pelo menos um produto precisa ser maior que zero!');
-                    event.preventDefault();
-                    event.stopPropagation();
                     form.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    return;
                 }
 
                 form.classList.add('was-validated');
-            }, false);
+                form.submit();
+            });
         });
 })();
 
