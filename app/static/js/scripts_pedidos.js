@@ -21,15 +21,13 @@
 
                     if (input.hasAttribute('minlength') &&
                         input.value.trim().length < input.getAttribute('minlength')) {
-                        camposEmBranco = true;
                         input.classList.add('is-invalid');
                         input.classList.remove('is-valid');
                     }
 
                     if (input.getAttribute('type') === 'email') {
-                        let formatoEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                        let formatoEmail = /^[a-zA-Z0-9._-]+@(?:(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,}$/;
                         if (!formatoEmail.test(input.value.trim())) {
-                            camposEmBranco = true;
                             input.classList.add('is-invalid');
                             input.classList.remove('is-valid');
                         }
@@ -37,7 +35,7 @@
 
                     if (input.getAttribute('type') === 'email') {
                         input.addEventListener('input', function () {
-                            let formatoEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                            let formatoEmail = /^[a-zA-Z0-9._-]+@(?:(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,}$/;
                             if (!formatoEmail.test(input.value.trim())) {
                                 input.classList.add('is-invalid');
                                 input.classList.remove('is-valid');
