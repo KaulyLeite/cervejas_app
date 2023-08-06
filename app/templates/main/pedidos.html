@@ -64,36 +64,42 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for produto in produtos %}
+                    {% if produtos %}
+                        {% for produto in produtos %}
+                            <tr>
+                                <th class="align-middle" scope="row">
+                                    <div class="card-img-container images">
+                                        <img class="img-fluid rounded-start" src="{{ produto.imagem.url }}"
+                                             alt="{{ produto.nome }}">
+                                    </div>
+                                </th>
+                                <td class="align-middle">
+                                    <label>
+                                        <input value="{{ produto.nome }}" hidden>
+                                    </label>{{ produto.nome }}
+                                </td>
+                                <td class="align-middle">
+                                    <label>
+                                        <input value="{{ produto.valor }}" hidden>
+                                    </label>R$ {{ produto.valor }}
+                                </td>
+                                <td class="align-middle">
+                                    <input onclick="decrementar('{{ forloop.counter }}_qtde')" class="input-button"
+                                           type="button" value="-">
+                                    <label for="{{ forloop.counter }}_qtde" hidden></label>
+                                    <input name="{{ forloop.counter }}_qtde" id="{{ forloop.counter }}_qtde"
+                                           class="input-qtde" type="number" min="0" max="99" value="0" maxlength="2"
+                                           oninput="this.value = Math.abs(this.value); validarQtde(this)" required>
+                                    <input onclick="incrementar('{{ forloop.counter }}_qtde')" class="input-button"
+                                           type="button" value="+">
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
                         <tr>
-                            <th class="align-middle" scope="row">
-                                <div class="card-img-container images">
-                                    <img class="img-fluid rounded-start" src="{{ produto.imagem.url }}"
-                                         alt="{{ produto.nome }}">
-                                </div>
-                            </th>
-                            <td class="align-middle">
-                                <label>
-                                    <input value="{{ produto.nome }}" hidden>
-                                </label>{{ produto.nome }}
-                            </td>
-                            <td class="align-middle">
-                                <label>
-                                    <input value="{{ produto.valor }}" hidden>
-                                </label>R$ {{ produto.valor }}
-                            </td>
-                            <td class="align-middle">
-                                <input onclick="decrementar('{{ forloop.counter }}_qtde')" class="input-button"
-                                       type="button" value="-">
-                                <label for="{{ forloop.counter }}_qtde" hidden></label>
-                                <input name="{{ forloop.counter }}_qtde" id="{{ forloop.counter }}_qtde"
-                                       class="input-qtde" type="number" min="0" max="99" value="0" maxlength="2"
-                                       oninput="this.value = Math.abs(this.value); validarQtde(this)" required>
-                                <input onclick="incrementar('{{ forloop.counter }}_qtde')" class="input-button"
-                                       type="button" value="+">
-                            </td>
+                            <td colspan="4" class="text-center">Não há produtos cadastrados!</td>
                         </tr>
-                    {% endfor %}
+                    {% endif %}
                     </tbody>
                 </table>
             </div>
