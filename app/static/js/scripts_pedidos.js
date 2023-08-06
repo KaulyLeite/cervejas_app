@@ -4,10 +4,73 @@
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
             form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
+                event.preventDefault();
+
+                let inputs = form.querySelectorAll('.form-control');
+                let camposEmBranco = false;
+
+                inputs.forEach(function (input) {
+                    if (input.value.trim() === '') {
+                        camposEmBranco = true;
+                        input.classList.add('is-invalid');
+                        input.classList.remove('is-valid');
+                    } else {
+                        input.classList.remove('is-invalid');
+                        input.classList.add('is-valid');
+                    }
+
+                    if (input.hasAttribute('minlength') &&
+                        input.value.trim().length < input.getAttribute('minlength')) {
+                        input.classList.add('is-invalid');
+                        input.classList.remove('is-valid');
+                    }
+
+                    if (input.getAttribute('type') === 'email') {
+                        let formatoEmail = /^[a-zA-Z0-9._-]+@(?:(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,}$/;
+                        if (!formatoEmail.test(input.value.trim())) {
+                            input.classList.add('is-invalid');
+                            input.classList.remove('is-valid');
+                        }
+                    }
+
+                    if (input.getAttribute('type') === 'email') {
+                        input.addEventListener('input', function () {
+                            let formatoEmail = /^[a-zA-Z0-9._-]+@(?:(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,}$/;
+                            if (!formatoEmail.test(input.value.trim())) {
+                                input.classList.add('is-invalid');
+                                input.classList.remove('is-valid');
+                            } else {
+                                input.classList.remove('is-invalid');
+                                input.classList.add('is-valid');
+                            }
+                        });
+                    } else {
+                        input.addEventListener('input', function () {
+                            if (input.value.trim() === '') {
+                                input.classList.add('is-invalid');
+                                input.classList.remove('is-valid');
+                            } else {
+                                input.classList.remove('is-invalid');
+                                input.classList.add('is-valid');
+                            }
+
+                            if (input.hasAttribute('minlength') &&
+                                input.value.trim().length < input.getAttribute('minlength')) {
+                                input.classList.add('is-invalid');
+                                input.classList.remove('is-valid');
+                            }
+                        });
+                    }
+                });
+
+                if (camposEmBranco) {
                     form.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    return;
+                }
+
+                if (!form.checkValidity()) {
+                    form.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    return;
                 }
 
                 let qtdeInputs = document.getElementsByClassName("input-qtde");
@@ -18,13 +81,13 @@
 
                 if (soma === 0) {
                     alert('A quantidade de pelo menos um produto precisa ser maior que zero!');
-                    event.preventDefault();
-                    event.stopPropagation();
                     form.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    return;
                 }
 
                 form.classList.add('was-validated');
-            }, false);
+                form.submit();
+            });
         });
 })();
 
