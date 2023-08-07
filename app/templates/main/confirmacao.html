@@ -62,10 +62,10 @@
                         <th class="align-middle" scope="row">
                             <div class="card-img-container images">
                                 <img class="img-fluid rounded-start" src="{{ produto.imagem.url }}"
-                                     alt="{{ produto.nome }}">
+                                     alt="{{ produto.nome }} {{ produto.marca }}">
                             </div>
                         </th>
-                        <td class="align-middle">{{ produto.nome }}</td>
+                        <td class="align-middle">{{ produto.nome }} {{ produto.marca }}</td>
                         <td class="align-middle">R$ {{ produto.valor }}</td>
                         <td class="align-middle">{{ produto.qtde }}</td>
                         <td class="align-middle">R$ {{ produto.total }}</td>

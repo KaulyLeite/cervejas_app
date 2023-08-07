@@ -207,7 +207,7 @@ def envio_email(pedido, nome, email, telefone, endereco,
         valor_formatado = locale.currency(produto.valor, grouping=True, symbol=True)
         total_formatado = locale.currency(produto.total, grouping=True, symbol=True)
 
-        descricao += f'Produto: {produto.nome}<br>'
+        descricao += f'Produto: {produto.nome} {produto.marca}<br>'
         descricao += f'Valor unitário: R$ {valor_formatado}<br>'
         descricao += f'Quantidade: {produto.qtde}<br>'
         descricao += f'Valor total: R$ {total_formatado}<br>'
