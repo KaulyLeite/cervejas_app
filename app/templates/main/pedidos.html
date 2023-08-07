@@ -70,13 +70,13 @@
                                 <th class="align-middle" scope="row">
                                     <div class="card-img-container images">
                                         <img class="img-fluid rounded-start" src="{{ produto.imagem.url }}"
-                                             alt="{{ produto.nome }}">
+                                             alt="{{ produto.nome }} {{ produto.marca }}">
                                     </div>
                                 </th>
                                 <td class="align-middle">
                                     <label>
-                                        <input value="{{ produto.nome }}" hidden>
-                                    </label>{{ produto.nome }}
+                                        <input value="{{ produto.nome }} {{ produto.marca }}" hidden>
+                                    </label>{{ produto.nome }} {{ produto.marca }}
                                 </td>
                                 <td class="align-middle">
                                     <label>
