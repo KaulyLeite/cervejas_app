@@ -124,4 +124,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application variables
 
 APP_NAME = 'Carlos Cervejas Especiais'
-APP_VERSION = '1.0.0'
+APP_VERSION = '1.1.0'
