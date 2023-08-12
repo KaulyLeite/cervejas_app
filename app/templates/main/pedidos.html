@@ -20,24 +20,27 @@
             <div class="row my-3 mx-1 justify-content-center">
                 <div class="form-group col-md-4">
                     <label for="nome">Nome</label>
-                    <input class="form-control" type="text" name="nome" id="nome" maxlength="50" required>
+                    <input class="form-control" type="text" name="nome" id="nome" maxlength="50" minlength="2" required>
                 </div>
                 <div class="form-group col-md-5">
                     <label for="email">E-mail</label>
-                    <input class="form-control" type="email" name="email" id="email" maxlength="254" required>
+                    <input class="form-control" type="email" name="email" id="email" maxlength="100" minlength="5"
+                           required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="telefone">Telefone</label>
-                    <input class="form-control" type="text" name="telefone" id="telefone"
+                    <input class="form-control" type="text" name="telefone" id="telefone" maxlength="15" minlength="14"
                            oninput="formatarTelefone()" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="endereco">Endereço</label>
-                    <input class="form-control" type="text" name="endereco" id="endereco" maxlength="100" required>
+                    <input class="form-control" type="text" name="endereco" id="endereco" maxlength="100" minlength="5"
+                           required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cidade">Cidade</label>
-                    <input class="form-control" type="text" name="cidade" id="cidade" maxlength="50" required>
+                    <input class="form-control" type="text" name="cidade" id="cidade" maxlength="50" minlength="2"
+                           required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="estado">Estado</label>
@@ -61,36 +64,42 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for produto in produtos %}
+                    {% if produtos %}
+                        {% for produto in produtos %}
+                            <tr>
+                                <th class="align-middle" scope="row">
+                                    <div class="card-img-container images">
+                                        <img class="img-fluid rounded-start" src="{{ produto.imagem.url }}"
+                                             alt="{{ produto.nome }} {{ produto.marca }}">
+                                    </div>
+                                </th>
+                                <td class="align-middle">
+                                    <label>
+                                        <input value="{{ produto.nome }} {{ produto.marca }}" hidden>
+                                    </label>{{ produto.nome }} {{ produto.marca }}
+                                </td>
+                                <td class="align-middle">
+                                    <label>
+                                        <input value="{{ produto.valor }}" hidden>
+                                    </label>R$ {{ produto.valor }}
+                                </td>
+                                <td class="align-middle">
+                                    <input onclick="decrementar('{{ forloop.counter }}_qtde')" class="input-button"
+                                           type="button" value="-">
+                                    <label for="{{ forloop.counter }}_qtde" hidden></label>
+                                    <input name="{{ forloop.counter }}_qtde" id="{{ forloop.counter }}_qtde"
+                                           class="input-qtde" type="number" min="0" max="99" value="0" maxlength="2"
+                                           oninput="this.value = Math.abs(this.value); validarQtde(this)" required>
+                                    <input onclick="incrementar('{{ forloop.counter }}_qtde')" class="input-button"
+                                           type="button" value="+">
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
                         <tr>
-                            <th class="align-middle" scope="row">
-                                <div class="card-img-container images">
-                                    <img class="img-fluid rounded-start" src="{{ produto.imagem.url }}"
-                                         alt="{{ produto.nome }}">
-                                </div>
-                            </th>
-                            <td class="align-middle">
-                                <label>
-                                    <input value="{{ produto.nome }}" hidden>
-                                </label>{{ produto.nome }}
-                            </td>
-                            <td class="align-middle">
-                                <label>
-                                    <input value="{{ produto.valor }}" hidden>
-                                </label>R$ {{ produto.valor }}
-                            </td>
-                            <td class="align-middle">
-                                <input onclick="decrementar('{{ forloop.counter }}_qtde')" class="input-button"
-                                       type="button" value="-">
-                                <label for="{{ forloop.counter }}_qtde" hidden></label>
-                                <input name="{{ forloop.counter }}_qtde" id="{{ forloop.counter }}_qtde"
-                                       class="input-qtde" type="number" min="0" max="99" value="0" maxlength="2"
-                                       oninput="this.value = Math.abs(this.value); validarQtde(this)" required>
-                                <input onclick="incrementar('{{ forloop.counter }}_qtde')" class="input-button"
-                                       type="button" value="+">
-                            </td>
+                            <td colspan="4" class="text-center">Não há produtos cadastrados!</td>
                         </tr>
-                    {% endfor %}
+                    {% endif %}
                     </tbody>
                 </table>
             </div>
