@@ -20,13 +20,14 @@
                             <div class="col-md-4">
                                 <div class="card-img-container">
                                     <img src="{{ produto.imagem.url }}" class="img-fluid rounded-start"
-                                         alt="{{ produto.nome }}">
+                                         alt="{{ produto.nome }} {{ produto.marca }}">
                                 </div>
                             </div>
 
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h6 class="card-title">{{ produto.nome }} - {{ produto.conteudo }}ml</h6>
+                                    <h6 class="card-title">{{ produto.nome }} {{ produto.marca }}
+                                        - {{ produto.conteudo }}ml</h6>
                                     <p class="card-text">&#8226; {{ produto.descricao }}</p>
                                     <p class="card-text">IBU {{ produto.ibu }} - ABV {{ produto.abv }}%</p>
                                     <h6 class="card-title">R$ {{ produto.valor }}</h6>
