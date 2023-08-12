@@ -4,7 +4,7 @@ Web system for advertising, sending orders by email and generating a PDF of the 
 
 ### Project Status:
 
-Finished (master - v1.0.0).
+Finished (master - v1.1.0).
 
 ## Setup
 
@@ -71,52 +71,52 @@ The data for configuring the email address and password for sending the order by
 
 Main page:
 
-![index](https://github.com/KaulyLeite/cervejas_app/assets/33230557/e42a439b-d604-46f0-872b-6be954f2464c)
+![1](https://github.com/KaulyLeite/cervejas_app/assets/33230557/7cf8318a-baa9-4c96-8861-f537a13d1ec8)
 
 <br>
 
 Products page:
 
-![produtos](https://github.com/KaulyLeite/cervejas_app/assets/33230557/7dbca366-6b45-41f6-9a4a-485747bd1038)
+![2](https://github.com/KaulyLeite/cervejas_app/assets/33230557/9f5b8c75-4a4b-41af-9b58-416f4d7dcf22)
 
 <br>
 
 About page:
 
-![sobre](https://github.com/KaulyLeite/cervejas_app/assets/33230557/a1206aa7-4f20-4a8e-8849-78333b3d8a3d)
+![3](https://github.com/KaulyLeite/cervejas_app/assets/33230557/ea7c4493-7263-453d-b386-664ddfc37a45)
 
 <br>
 
 Order page:
 
-![pedidos](https://github.com/KaulyLeite/cervejas_app/assets/33230557/00729d89-0b44-4589-a3dd-adbe036891dd)
+![4](https://github.com/KaulyLeite/cervejas_app/assets/33230557/ac9826bd-ea2b-41b7-8c61-0d4f6251c2d5)
 
 <br>
 
 Order confirmation page:
 
-![confirmacao](https://github.com/KaulyLeite/cervejas_app/assets/33230557/b6271d12-0606-4325-9ae6-998ddc6eba15)
+![5](https://github.com/KaulyLeite/cervejas_app/assets/33230557/f29ad321-70c9-4b19-b506-3816548e7ebc)
 
 <br>
 
 Order submission page:
 
-![envio](https://github.com/KaulyLeite/cervejas_app/assets/33230557/8a088c4f-5b87-48b3-865f-6b134cd929b4)
+![6](https://github.com/KaulyLeite/cervejas_app/assets/33230557/42191939-840d-46dd-88a6-f75791596d8f)
 
 <br>
 
 Order submission error page:
 
-![erro](https://github.com/KaulyLeite/cervejas_app/assets/33230557/519edd18-fc49-4b06-ac82-52f7f17ddb07)
+![7](https://github.com/KaulyLeite/cervejas_app/assets/33230557/ee12d894-4164-4ca7-b4be-621d791bb6ea)
 
 <br>
 
 PDF generation page:
 
-![pdf](https://github.com/KaulyLeite/cervejas_app/assets/33230557/c78ad196-1436-4cfe-9e53-b76437a6765c)
+![8](https://github.com/KaulyLeite/cervejas_app/assets/33230557/2145222f-1974-4022-ac0b-fb56f9e5cd4a)
 
 <br>
 
 Mobile view of a page:
 
-![mobile](https://github.com/KaulyLeite/cervejas_app/assets/33230557/a2bf79f4-318b-4a5f-ab76-3c30e1d69536)
+![9](https://github.com/KaulyLeite/cervejas_app/assets/33230557/c1cd2734-6d99-468b-a902-22f941e06d73)
